@@ -1,0 +1,62 @@
+<?php
+    $e = $this->element;
+    $labelHelper = $this->formLabel();
+    $label = $e->getLabel();
+    $labelHelperTranlator = $labelHelper->getTranslator();
+    if($label AND $labelHelperTranlator) {
+        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
+    }
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+
+<div class="row-fluid">
+    <div class="panel panel-default sheep_it_replicator">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#<?=$e->getName()?>" href="javascript:;" id="toggle_link">
+                    <?=$e->getLabel()?>
+                </a>
+                <?php if(count($e->getForms()) > 1): ?>
+                <select id="search_selector" class="form_field_st1" style="min-width: 100px; margin-left: 5px;">
+                    <?php foreach($e->getForms() as $key => $value):?>
+                        <option value="<?=$key?>"><?=$key?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php endif; ?>
+                
+                <span id="<?=$e->getName()?>_controls">
+                    <select id="<?=$e->getName()?>_selector" style="display: none;"> </select>
+                    <a id="<?=$e->getName()?>_add" href="#" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span> Add <?=$e->singularLabel()?></a>
+                    <a id="<?=$e->getName()?>_remove_all" href="#" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-minus"></span> Remove All</a>
+                </span>
+                <!--<a id="adv_search_add" href="#" class="btn btn-xs btn-primary" style="color:white; display:none;"><span class="glyphicon glyphicon-plus"></span> Add </a>-->
+                <span style="float:right">
+                    <span data-toggle="collapse" data-target="#<?=$e->getName()?>" id="resize_full" class="my_icon glyphicon glyphicon-resize-full" onclick="<?=$e->getName() ?>_sheepit_obj.resize()" style="color:grey; display:none;"></span>
+                    <span data-toggle="collapse" data-target="#<?=$e->getName()?>" id="resize_small" class="my_icon glyphicon glyphicon-resize-small" onclick="<?=$e->getName() ?>_sheepit_obj.resize()" style="color:grey; cursor:pointer"></span>
+                    <?php if($e->closeButton()): ?> <span id="close" class="redcolor my_icon glyphicon glyphicon-remove" onclick="<?=$e->getName() ?>_sheepit_obj.close();"></span>    <?php endif; ?>
+                </span>
+            </h4>
+        </div>
+        <div id="<?=$e->getName()?>" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <input type="hidden" name="<?=$e->getName()?>_active" value="<?=($e->getDisabled() ? 0 : 1)?>"/>
+                <?php echo $e->render($this); ?>
+                <div style="margin:8px;" id="<?=$e->getName()?>_noforms_template">No registers found</div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if($e->initData()):?>
+    <script><?= $e->initData() ?> </script>
+<?php endif; ?>
+
+<?php if($e->getDisabled()):?>
+    <script>
+    $(document).ready(function(){ 
+        $(window).load( function() {
+        window.<?= $e->getName() ?>_sheepit_obj.disable();
+    })});
+    </script>
+<?php endif; ?>
