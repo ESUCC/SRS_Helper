@@ -1,0 +1,27 @@
+<?php
+    $e = $this->element;
+    $label = $e->getLabel();
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+<div class="<?=($e->getAttribute('type') == "radio"?'radio-container':'')?>">
+    <div class="form-group <?php if($err){ echo "error";} ?>" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
+        <?= ($showLabel) ? $renderer->formLabel($e) : ''?>
+        <div>
+            <?=$renderer->formElement($e)?>
+            <?php if(isset($extended['help'])) { ?>
+            <span class="help-block mobile_only">
+                <?=$extended['help']['content']?>
+            </span>
+            <?php } ?>
+
+            <?php if($err): ?>
+            <span class="help-block with-errors" style="display:none;">
+                <?=$err?>
+            </span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,33 @@
+<?php
+    $e = $this->element;
+    $e->setAttribute('class', $e->getAttribute('class').' form-control');
+    $label = ($e->getLabel() ? $this->translate($e->getLabel()) : "");
+    $extended = $e->getOption('extended');
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    if(!isset($extended['help'])){
+        $extended['help'] = array('content' => '&nbsp;');
+    }
+?>
+<div class="elementWrapper">
+<?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
+    <div class="input-group <?php if(isset($extended['prepend'])) { echo 'input-icon'; } ?>">
+    <?php } ?>    
+    <?php if(isset($extended['prepend'])) { ?><span class="input-group-addon"><?= $extended['prepend'] ?></span><?php } ?>
+    <?php echo $this->formInput($e); ?>
+    <?php if(isset($extended['append'])) { ?><span class="input-group-addon"><?= $extended['append'] ?></span><?php } ?>
+    <?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
+    </div>
+    <?php } ?>  
+    <span class="help-block" style="display:none;">
+        <?=$this->translate($extended['help']['content'])?>
+    </span>
+    
+    
+    <?php if($err) { ?>
+    <span class="help-block with-errors" style="display:none;">
+    <?php foreach($err as $k => $v) { 
+            echo $this->translate($v);
+        } ?>
+    </span>
+<?php } ?>
+</div>

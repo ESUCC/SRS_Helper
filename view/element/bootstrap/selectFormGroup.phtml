@@ -1,0 +1,19 @@
+<?php
+    $e = $this->element;
+    $label = $this->translate($e->getLabel());
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+
+<div class=" form-group" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
+    <?= $showLabel ? $renderer->formLabel($e) : '' ?>
+    <div>
+        <?=$renderer->formElement($e)?>
+        <?php if($err): ?>
+        <span class="help-block with-errors" style="display:none;">
+            <?=$err?>
+        </span>
+        <?php endif; ?>
+    </div>
+</div>

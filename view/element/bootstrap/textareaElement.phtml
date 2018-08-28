@@ -1,0 +1,24 @@
+<?php
+    $e = $this->element;
+    $e->setAttribute('class', $e->getAttribute('class').' form-control');
+    $label = $this->translate($e->getLabel());
+    $extended = $e->getOption('extended');
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+<div class="elementWrapper">
+    <?php echo $this->formTextarea($e);
+    if(isset($extended['help'])):?>
+    <span class="help-block mobile_only">
+        <?=$this->translate($extended['help']['content']) ?>
+    </span>
+    <?php endif;
+          if($err) { ?>
+<span class="help-block with-errors" style="display:none;">
+    <ul>
+    <?php foreach($err as $k => $v) { ?>
+    	<li><?=$this->translate($v)?></li>
+    <?php } ?>
+    </ul>
+</span>
+    <?php } ?>
+</div>
