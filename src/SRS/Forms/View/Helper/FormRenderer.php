@@ -1,6 +1,6 @@
 <?php
 
-namespace Makersoft\Forms\View\Helper;
+namespace SRS\Forms\View\Helper;
 
 use \Zend\View\Helper\AbstractHelper;
 
@@ -8,7 +8,7 @@ class FormRenderer extends AbstractHelper
 {
     private $renderer = null;
     
-    public function __construct(\Makersoft\Forms\Renderer $renderer){
+    public function __construct(\SRS\Forms\Renderer $renderer){
         $this->renderer = $renderer;        
     }
     

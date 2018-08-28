@@ -1,0 +1,40 @@
+<?php
+    $e = $this->element;
+    $labelHelper = $this->formLabel();
+	$label = trim($e->getLabel());
+    $labelHelperTranlator = $labelHelper->getTranslator();
+    if($label AND $labelHelperTranlator) {
+        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
+    }
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+?>
+
+<div class="form-group <?php if($err){ echo "error";}?>">
+    <!--<label class="control-label" for="<?= $e->getAttribute('id'); ?>">
+        <?php if($label) { ?><?php if($required) { echo '<em>*</em>'; } ?><?= $label; ?><?php } else{ echo '&nbsp;'; }?>
+    </label>-->
+    <?php echo $renderer->formLabel($e);
+    
+    echo $renderer->formElement($e); if($err) { ?>
+    <?php if(count($extended['help']) > 0) { ?>
+    <span class="help-block">
+            <?php if($labelHelperTranlator) { 
+                    echo $labelHelperTranlator->translate($extended['help']['content'], $labelHelper->getTranslatorTextDomain());
+            } else {
+                    echo $extended['help']['content'];
+            } ?>
+    </span>
+    <?php } ?>
+    <span class="help-block with-errors" style="display:none;">
+    <?php foreach($err as $k => $v) { ?>
+    	<?php if($labelHelperTranlator) { 
+            echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
+        } else {
+            echo $v;
+        } ?>
+    <?php } ?>
+    </span>
+    <?php } ?>
+</div>

@@ -1,12 +1,10 @@
 <?php
 
-require_once __DIR__.'/../../../../config/configurations.local.php';
-
 return [
 
     'view_helpers' => [
         'invokables' => [
-
+            'SRSFormSelect' => \SRS\Forms\View\Helper\SRSFormSelect::class,
         ],
         'shared' => [
             'formRenderer' => false,
@@ -19,11 +17,14 @@ return [
     'view_manager' => [
         'template_path_stack' => [
             'ReverseFormElements' => __DIR__ . '/../view/element',
-            'RootElemebts' => BASE_DIR,
+            'RootElemebts' => '/',
         ],
     ],
 
     'srs_form' => [
+        'settings' => [
+            'jsPlaceholderName' => 'srs_form-js-placeholder'
+        ],
         'SRS\Forms\Element\SheepItDuplicator' => [
             'js' => [
                 
@@ -44,7 +45,7 @@ return [
                 "allowAddN" => true,
                 "maxFormsCount" => 10,
                 "insertNewForms" => '"before"',
-                "afterAdd" => 'function(source, newForm){ $("input", newForm).not(".noStyle").iCheck(window.icheck);}',
+                //"afterAdd" => 'function(source, newForm){ $("input", newForm).not(".noStyle").iCheck(window.icheck);}',
                 "afterRemoveCurrent" => '""',
                 "indexFormat" => "'m_index_m'",
             ]

@@ -4,7 +4,7 @@ namespace SRS\Forms\Factory\View\Helper;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Makersoft\Forms\View\Helper\FormRenderer;
+use SRS\Forms\View\Helper\FormRenderer;
 
 class FormRendererFactory implements FactoryInterface
 {

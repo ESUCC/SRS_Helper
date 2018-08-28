@@ -50,7 +50,7 @@ class Bootstrap extends Renderer
         return $this->view->partial('bootstrap/inputElement.phtml', ['element' => $element]);
     }
     
-    public function formNoColumn($element, $showLabel = true){
+    public function formGroup($element, $showLabel = true){
         
         if($element instanceOf ExtendedElement) {
             if(!$element->getOption('extended')){
@@ -67,34 +67,34 @@ class Bootstrap extends Renderer
         }
         
         if ($element instanceof ExtendedElement AND $element->getTemplate()) {
-            return $this->view->partial('bootstrap/' . $element->getTemplate().'FormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/' . $element->getTemplate().'FormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
 
         if($element instanceof \SRS\Forms\Element\AutoComplete){
-            return $this->view->partial('bootstrap/autoCompleteFormNoColumn.phtml', ['element' => $element, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/autoCompleteFormGroup.phtml', ['element' => $element, 'showLabel' => $showLabel]);
         }
 		
         if ($element->getAttribute('type') == 'checkbox'){
-                return $this->view->partial('bootstrap/singleCheckboxFormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+                return $this->view->partial('bootstrap/singleCheckboxFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
         
         if ($element->getAttribute('type') == 'multi_checkbox' || $element->getAttribute('type') == 'radio') {
-            return $this->view->partial('bootstrap/checkboxFormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/checkboxFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
         
         if ($element->getAttribute('type') == 'select' || $element instanceof \DoctrineModule\Form\Element\ObjectSelect) {
-            return $this->view->partial('bootstrap/selectFormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/selectFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
         
         if ($element->getAttribute('type') == 'textarea') {
-            return $this->view->partial('bootstrap/textareaFormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/textareaFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
         
         if ($element->getAttribute('type') == 'file') {
-            return $this->view->partial('bootstrap/fileFormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/fileFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
 
-        return $this->view->partial('bootstrap/inputFormNoColumn.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+        return $this->view->partial('bootstrap/inputFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         //}
     }
     

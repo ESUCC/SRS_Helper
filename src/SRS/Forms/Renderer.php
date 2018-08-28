@@ -104,26 +104,26 @@ class Renderer
 
     public function prepare()
     {
-        /*if(!$this->prepared)
-        {*/
-        $class = '';
-        switch($this->form_type)
+        if(!$this->prepared)
         {
-            case 'responsive':
-                break;
-            case 'horizontal':
-                $class = 'form-horizontal';
-                break;
-            case 'vertical':
-                $class = 'form-vertical';
-                break;
-        }
+            $class = '';
+            switch($this->form_type)
+            {
+                case 'responsive':
+                    break;
+                case 'horizontal':
+                    $class = 'form-horizontal';
+                    break;
+                case 'vertical':
+                    $class = 'form-vertical';
+                    break;
+            }
 
-        $this->prepareRenderer();
-        $this->_form->setAttribute('class', $this->_form->getAttribute('class').' '.$class);
-        $this->_form->prepare();
-            /*$this->prepared = true;
-        }*/
+            $this->prepareRenderer();
+            $this->_form->setAttribute('class', $this->_form->getAttribute('class').' '.$class);
+            $this->_form->prepare();
+            $this->prepared = true;
+        }
     }
 
     public function openTag()
@@ -158,11 +158,6 @@ class Renderer
 
             if ($inlineJs = $element->getInlineJs() AND strlen($inlineJs) > 0) {
                 $script = sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig()));
-                //str_replace('"', "", $script);
-                /*echo "<pre>";
-                echo $script;
-                echo "</pre>";
-                die();*/
                 
                 preg_match_all('/"function[^"]*"/', $script, $matches);
                 if(isset($matches[0]))
@@ -346,14 +341,4 @@ class Renderer
         }
         return $this;
     }
-
-   /* public function setServiceManager(ServiceManager $serviceManager)
-    {
-        
-    }
-    
-    public function getServiceManager(){
-        return $this->serviceManager;
-    }*/
-
 }
