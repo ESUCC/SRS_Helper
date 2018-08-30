@@ -4,8 +4,6 @@ namespace SRS\Forms\Renderer;
 
 use SRS\Forms\Renderer;
 use SRS\Forms\ExtendedElement;
-use Zend\Form\FieldsetInterface;
-use Zend\Form\ElementInterface;
 
 class Bootstrap extends Renderer
 {
@@ -102,7 +100,7 @@ class Bootstrap extends Renderer
     public function formLabel($element){
         return $this->view->partial('bootstrap/label.phtml', ['element' => $element]);
     }
-    
+
     public function formLabelCol($element, $col){
         return $this->view->partial('bootstrap/labelCol.phtml', ['element' => $element, 'colsLabel' => $col]);
     }
@@ -137,6 +135,7 @@ class Bootstrap extends Renderer
 
         if ($element->getAttribute('type') == 'select') {
             return $this->view->partial('bootstrap/select'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
+            return $this->view->partial('bootstrap/' . $element->getTemplate().$type.'.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
         }
 
 
