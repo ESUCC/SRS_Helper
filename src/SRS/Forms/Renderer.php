@@ -179,7 +179,7 @@ class Renderer
         }
     }
 
-    public function formRow($element)
+    public function formRow($element, $colsLabel, $colsElement)
     {
         // implement it in the specific renderer
     }

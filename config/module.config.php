@@ -3,14 +3,18 @@
 return [
 
     'view_helpers' => [
+        'aliases' => [
+            'formRenderer' => \SRS\Forms\View\Helper\FormRenderer::class
+        ],
         'invokables' => [
+            'slugify' => \Makersoft\Forms\View\Helper\Slugify::class,
             'SRSFormSelect' => \SRS\Forms\View\Helper\SRSFormSelect::class,
         ],
         'shared' => [
             'formRenderer' => false,
         ],
         'factories' => [
-            'formRenderer' => \SRS\Forms\Factory\View\Helper\FormRendererFactory::class
+            \SRS\Forms\View\Helper\FormRenderer::class => \SRS\Forms\Factory\View\Helper\FormRendererFactory::class
         ]
     ],
 

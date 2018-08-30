@@ -103,62 +103,13 @@ class Bootstrap extends Renderer
         return $this->view->partial('bootstrap/label.phtml', ['element' => $element]);
     }
     
-    public function form1Col($element){
-        $this->normalizeElement($element);
-        
-        if($element instanceOf ExtendedElement) {
-            if(!$element->getOption('extended')){
-                $element->setOption('extended', []);
-            }
-
-            if(isset($this->globalFormConfig[get_class($element)])){
-                $element->injectGlobalConfig(
-                        $this->globalFormConfig[get_class($element)]
-                );
-            }
-            $this->extractExtendedElementData($element);
-            $element->injectSettings($this->getSettings());
-        }
-        
-        if ($element instanceof ExtendedElement AND $element->getTemplate()) {
-            return $this->view->partial('bootstrap/' . $element->getTemplate().'_1col.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-        
-        $resolver = $this->serviceManager->get('Zend\View\Resolver\TemplatePathStack');
-        if($resolver->resolve('bootstrap/'.$element->getAttribute('type').'_1col.phtml'))
-            return $this->view->partial('bootstrap/'.$element->getAttribute('type').'_1col.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        else
-            return $this->view->partial('bootstrap/input_1col.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-    }
-    
-    public function form2Col($element){
-        $this->normalizeElement($element);
-        
-        if($element instanceOf ExtendedElement) {
-           if(isset($this->globalFormConfig[get_class($element)])){
-                $element->injectGlobalConfig(
-                    $this->globalFormConfig[get_class($element)]
-                );
-            }
-            $this->extractExtendedElementData($element);
-            $element->injectSettings($this->getSettings());
-        }
-        
-        if ($element instanceof ExtendedElement AND $element->getTemplate()) {
-            return $this->view->partial('bootstrap/' . $element->getTemplate().'_2col.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-
-        $resolver = $this->serviceManager->get('Zend\View\Resolver\TemplatePathStack');
-        if($resolver->resolve('bootstrap/'.$element->getAttribute('type').'_2col.phtml'))
-            return $this->view->partial('bootstrap/'.$element->getAttribute('type').'_2col.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        else
-            return $this->view->partial('bootstrap/input_2col.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+    public function formLabelCol($element, $col){
+        return $this->view->partial('bootstrap/labelCol.phtml', ['element' => $element, 'colsLabel' => $col]);
     }
 
-    public function formRow($element, $showLabel = true)
+    public function formRow($element, $colsLabel, $colsElement)
     {
-        $type = "Responsive";
-        
+        $type = 'v_row';
         $this->normalizeElement($element);
         
         if($element instanceOf ExtendedElement) {
@@ -173,106 +124,26 @@ class Bootstrap extends Renderer
         
         
         if ($element instanceof ExtendedElement && $element->getTemplate()) {
-            return $this->view->partial('bootstrap/' . $element->getTemplate().$type.'.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/' . $element->getTemplate().$type.'.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
         }
 		
         if ($element->getAttribute('type') == 'checkbox'){
-                return $this->view->partial('bootstrap/single_checkbox.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+                return $this->view->partial('bootstrap/single_checkbox.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
         }
 
         if ($element->getAttribute('type') == 'multi_checkbox' || $element->getAttribute('type') == 'radio') {
-            return $this->view->partial('bootstrap/checkbox.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/checkbox.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
         }
 
         if ($element->getAttribute('type') == 'select') {
-            return $this->view->partial('bootstrap/select'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/select'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
         }
 
 
         if ($element->getAttribute('type') == 'textarea') {
-            return $this->view->partial('bootstrap/textarea'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+            return $this->view->partial('bootstrap/textarea'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
         }
 		
-        return $this->view->partial('bootstrap/input'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+        return $this->view->partial('bootstrap/input'.$type.'.phtml', ['element' => $element, 'renderer' => $this, 'colsLabel' => $colsLabel, 'colsElement' => $colsElement]);
     }
-    
-    public function formResponsive($element){
-        $this->normalizeElement($element);
-        
-        if($element instanceOf ExtendedElement) {
-            if(isset($this->globalFormConfig[get_class($element)])){
-                $element->injectGlobalConfig(
-                        $this->globalFormConfig[get_class($element)]
-                );
-            }
-            $this->extractExtendedElementData($element);
-            $element->injectSettings($this->getSettings());
-        }
-                
-        if ($element instanceof ExtendedElement AND $element->getTemplate()) {
-            return $this->view->partial('bootstrap/' . $element->getTemplate().'Responsive.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-		
-        if ($element->getAttribute('type') == 'checkbox'){
-                return $this->view->partial('bootstrap/singleCheckboxResponsive.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-
-        if ($element->getAttribute('type') == 'multi_checkbox' || $element->getAttribute('type') == 'radio') {
-            return $this->view->partial('bootstrap/checkboxResponsive.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-
-        if ($element->getAttribute('type') == 'select') {
-            return $this->view->partial('bootstrap/selectResponsive.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-
-
-        if ($element->getAttribute('type') == 'textarea') {
-            return $this->view->partial('bootstrap/textareaResponsive.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-		
-        return $this->view->partial('bootstrap/inputResponsive.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-    }
-    
-    public function formCaptcha($element)
-    {
-        $this->normalizeElement($element);
-        return $this->view->partial('bootstrap/captcha.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-    }
-
-    public function formCollection($element)
-    {
-
-        $renderer = $this->getView();
-
-        if (!method_exists($renderer, 'plugin')) {
-            // Bail early if renderer is not pluggable
-            return '';
-        }
-
-        $markup = '';
-        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-
-        foreach ($element->getIterator() as $elementOrFieldset) {
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                $markup .= $this->formCollection($elementOrFieldset);
-            } elseif ($elementOrFieldset instanceof ElementInterface) {
-                $markup .= $this->formRow($elementOrFieldset);
-            }
-        }
-
-        // Every collection is wrapped by a fieldset if needed
-        if ($this->shouldWrap) {
-            $label = $element->getLabel();
-            if (!empty($label)) {
-                $label = $escapeHtmlHelper($label);
-                $markup = sprintf(
-                    '<fieldset><legend>%s</legend>%s</fieldset>', $label, $markup
-                );
-            }
-        }
-
-        return $markup;
-        
-    }
-
 }

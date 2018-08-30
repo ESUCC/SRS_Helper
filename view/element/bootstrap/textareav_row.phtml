@@ -1,0 +1,45 @@
+<?php
+    $e = $this->element;
+    $label = $this->translate($e->getLabel());
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $maxlengh = $e->getAttribute('maxlength');
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    $id = $e->getAttribute('name');
+    $e->setAttribute('id', $id);
+    $colsLabel = $this->colsLabel;
+    $colsElement = $this->colsElement;
+?>
+<div class="form-group row <?php if($err){ echo "error";} ?>" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
+    <?php if(isset($extended['key'])): ?>
+    <input type="hidden" name="key" value="<?=$extended['key']?>"/>
+    <?php endif;?>
+    <?= $renderer->formLabelCol($e, $colsLabel) ?>
+    <div class="col-xs-<?=$colsElement?>">
+        <?=$renderer->formElement($e)?>
+        <?php if(isset($extended['helper_under'])) { ?>
+            <span class="help-block">
+                <?=$extended['helper_under']['content']?>
+            </span>
+        <?php } ?>
+        <?php if($maxlengh):?>
+        <div class="textarea_counter"><?=$this->translate("Characters left")?>: <span><?=$maxlengh?></span></div>
+        <script>
+        $(document).ready(function() {
+            //var text_max = 99;
+            $('#<?=$id?>').keyup(function() {
+                var text_length = $(this).val().length;
+                var text_remaining = <?=$maxlengh?> - text_length;
+
+                $("span", $(this).next()).html(text_remaining);
+            });
+        });
+        </script>
+        <?php endif;?>
+        <?php if($err): ?>
+        <span class="help-block with-errors" style="display:none;">
+            <?=$err?>
+        </span>
+        <?php endif; ?>
+    </div>
+</div>
