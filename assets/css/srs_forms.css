@@ -79,6 +79,19 @@
     width: 100%;
 }
 
+.mt5{
+    margin-top: 5px;
+}
+
 .pr10{
     padding-right: 10px;
+}
+
+label.control-label{
+    cursor:pointer;
+}
+
+.elementWrapper input[type="checkbox"]{
+    width:16px;
+    height: 16px;
 }

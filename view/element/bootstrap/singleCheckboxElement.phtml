@@ -1,0 +1,44 @@
+<?php
+    $e = $this->element;
+    $label = $this->translate($e->getLabel());
+    $extended = $e->getOption('extended');
+    if($e->getAttribute('type') == 'checkbox') {
+        $name = $e->getName();
+        $values = $e->getValue();
+    } else {
+        $name = $e->getName();
+        $values = array(0 => $e->getValue());
+    }
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    
+    $attributes_string = 'name="'.$name.'"';
+    
+    $attributes = $e->getAttributes();
+    unset($attributes['name']);
+    if(isset($attributes['required'])) unset($attributes['required']);
+    if(isset($attributes['id'])) unset($attributes['id']);
+    
+    foreach($attributes as $key => $value){
+        $attributes_string .= ' '.$key.'="'.$value.'"';
+    }   
+    
+    $value = $e->getValue();
+    $id_element = ($e->getAttribute('type') == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));
+?>
+<div class="elementWrapper">
+    <input <?=$attributes_string?> 
+           value="<?= $e->getCheckedValue() ?>" <?php if($value == $e->getCheckedValue()){ echo 'checked="checked"'; } ?> 
+           id="<?=$id_element?>">
+    
+    <?php if($e->useHiddenElement()): ?>
+        <input type="hidden" name="<?=$e->getName()?>" value="<?=$e->getUncheckedValue()?>">
+    <?php endif; ?>
+	
+<?php if($err): ?>
+<ul>
+    <?php foreach($err as $k => $v): ?>
+    <li><?=$this->translate($v)?></li>
+    <?php endforeach;?>
+</ul>
+<?php endif; ?>
+</div>

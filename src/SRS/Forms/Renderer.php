@@ -11,7 +11,6 @@ use Zend\View\Helper\EscapeHtmlAttr;
 
 class Renderer
 {
-
     public $view = false;
     protected $serviceManager;
     public $_form;
@@ -90,12 +89,12 @@ class Renderer
 
     public function prepareRenderer()
     {
-        if ($this->getCss() AND $this->view) {
+        if ($this->getCss() && $this->view) {
             foreach ($this->getCss() as $c) {
                 $this->view->headLink()->appendStylesheet($c);
             }
         }
-        if ($this->getJs() AND $this->view) {
+        if ($this->getJs() && $this->view) {
             foreach ($this->getJs() as $j) {
                 $this->view->headScript()->appendFile($j, 'text/javascript');
             }
@@ -142,27 +141,32 @@ class Renderer
     public function extractExtendedElementData($element)
     {
 
-        if ($element instanceOf ExtendedElement AND $this->view) {
+        if ($element instanceOf ExtendedElement && $this->view) {
 
-            if ($js = $element->getJs() AND is_array($js)) {
+            $js = $element->getJs();
+            if(is_array($js)) {
                 foreach ($js as $j) {
                     $this->view->headScript()->appendFile($j, 'text/javascript');
                 }
             }
 
-            if ($css = $element->getCss() AND is_array($css)) {
+            $css = $element->getCss();
+            if (is_array($css)) {
                 foreach ($css as $c) {
                     $this->view->headLink()->appendStylesheet($c);
                 }
             }
 
-            if ($inlineJs = $element->getInlineJs() AND strlen($inlineJs) > 0) {
+            $inlineJs = $element->getInlineJs();
+            if (strlen($inlineJs) > 0) {
                 $script = sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig()));
                 
                 preg_match_all('/"function[^"]*"/', $script, $matches);
-                if(isset($matches[0]))
-                    foreach($matches[0] as $match)
+                if(isset($matches[0])){
+                    foreach($matches[0] as $match){
                         $script = str_replace($match, str_replace('\\u0027', "'", substr($match, 1, -1)), $script);
+                    }
+                }
 
                 $this->view->placeholder($this->getJsHolderName())
                     ->append($script);
@@ -340,5 +344,19 @@ class Renderer
             $this->localConfig = $this->globalFormConfig[get_class($this)];
         }
         return $this;
+    }
+    
+    protected function initExtendedElement($element){
+        if(!$element->getOption('extended')){
+            $element->setOption('extended', []);
+        }
+
+        if(isset($this->globalFormConfig[get_class($element)])){
+            $element->injectGlobalConfig(
+                $this->globalFormConfig[get_class($element)]
+            );
+        }
+        $this->extractExtendedElementData($element);
+        $element->injectSettings($this->getSettings());
     }
 }

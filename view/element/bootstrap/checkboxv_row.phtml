@@ -7,7 +7,7 @@
     $colsLabel = $this->colsLabel;
     $colsElement = $this->colsElement;
 ?>
-<div class="form-group row <?php if($err){ echo "error";} ?>" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
+<div class="form-group row mt5 <?php if($err){ echo "error";} ?>" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
     <?= $renderer->formLabelCol($e, $colsLabel) ?>
     <div class="col-xs-<?=$colsElement?>">
         <?=$renderer->formElement($e)?>

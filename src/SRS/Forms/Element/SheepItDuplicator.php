@@ -64,7 +64,7 @@ class SheepItDuplicator extends ExtendedElement
     protected $forms = array();
     public function addForm($form, $label_selector = 'default', $template = null){
         $form_name = $form->getAttribute('name');
-        if($this->default_selector == "") $this->default_selector = $form_name;
+        if($this->default_selector == ""){ $this->default_selector = $form_name; }
         foreach($form as $e){
             $e->setAttribute('id', $this->getName().'_'.$form_name.'_m_index_m_'.$e->getName());
             $e->setName($this->getName()."[$form_name][m_index_m][".$e->getName()."]");
@@ -83,8 +83,8 @@ class SheepItDuplicator extends ExtendedElement
     
     
     public function getForm($formName = null){
-        if(!$formName) $formName = $this->default_selector;
-        if(!isset($this->forms[$formName])) return null;
+        if(!$formName){ $formName = $this->default_selector; }
+        if(!isset($this->forms[$formName])){ return null; }
         return $this->forms[$formName][0];
     }
     

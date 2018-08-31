@@ -1,0 +1,26 @@
+<?php
+    $e = $this->element;
+    $label = $e->getLabel();
+    $extended = $e->getOption('extended');
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    $colsLabel = $this->colsLabel;
+    $colsElement = $this->colsElement;
+?>
+<div class="form-group row mt5 <?php if($err){ echo "error";} ?>" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
+    <?= $renderer->formLabelCol($e, $colsLabel) ?>
+    <div class="col-xs-<?=$colsElement?>">
+        <?=$renderer->formElement($e)?>
+        <?php if(isset($extended['help'])) { ?>
+        <span class="help-block mobile_only">
+            <?=$extended['help']['content']?>
+        </span>
+        <?php } ?>
+
+        <?php if($err): ?>
+        <span class="help-block with-errors" style="display:none;">
+            <?=$err?>
+        </span>
+        <?php endif; ?>
+    </div>
+</div>

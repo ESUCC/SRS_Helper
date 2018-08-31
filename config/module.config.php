@@ -17,11 +17,15 @@ return [
             \SRS\Forms\View\Helper\FormRenderer::class => \SRS\Forms\Factory\View\Helper\FormRendererFactory::class
         ]
     ],
-
+    'form_elements' => [
+        'factories' => [
+            //\SRS\Forms\Element\DatePicker::class => 
+        ]
+    ],
     'view_manager' => [
         'template_path_stack' => [
             'ReverseFormElements' => __DIR__ . '/../view/element',
-            'RootElemebts' => '/',
+            'RootElements' => '/',
         ],
     ],
 
@@ -29,7 +33,7 @@ return [
         'settings' => [
             'jsPlaceholderName' => 'srs_form-js-placeholder'
         ],
-        'SRS\Forms\Element\SheepItDuplicator' => [
+        \SRS\Forms\Element\SheepItDuplicator::class => [
             'js' => [
                 
             ],
@@ -37,9 +41,9 @@ return [
                 
             ],
             'template' => 'sheepitduplicator',
-            'inlineJs' => " $(document).ready(function() {
-                                if(window.%1\$s_sheepit_obj === undefined) window.%1\$s_sheepit_obj = $('#%1\$s').sheepIt(%2\$s);
-                            });",
+            'inlineJs' => "
+                if(window.%1\$s_sheepit_obj === undefined) window.%1\$s_sheepit_obj = $('#%1\$s').sheepIt(%2\$s);
+            ",
             'inlineJsConfig' => [
                 "separator" => '""',
                 "allowRemoveLast" => true,
@@ -55,6 +59,24 @@ return [
             ]
         ],
         
+        \SRS\Forms\Element\DatePicker::class => [
+            'template' => 'datepicker',
+            'extended' => [
+                'date-format' => 'MM/DD/YYYY'
+            ],
+            'inlineJs' => "
+            $('#%1\$s').periodpicker({
+                withoutBottomPanel: true,
+                resizeButton: false,
+                fullsizeButton: false,
+                norange: true,
+                cells: [1, 1],
+                hideOnBlur: true,
+                likeXDSoftDateTimePicker: true,
+                formatDecoreDateWithYear: $('#%1\$s').attr('data-date-format'),
+                formatDate: $('#%1\$s').attr('data-date-format')
+            });"
+        ]
         
     ],
     'service_manager' => [

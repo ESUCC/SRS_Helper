@@ -1,0 +1,46 @@
+<?php
+    $e = $this->element;
+    $labelHelper = $this->formLabel();
+    $label = trim($e->getLabel());
+    $labelHelperTranlator = $labelHelper->getTranslator();
+    if($label AND $labelHelperTranlator) {
+        $label = $labelHelperTranlator->translate($label, $labelHelper->getTranslatorTextDomain());
+    }
+    $extended = $e->getOption('extended');
+    if($e->getAttribute('type') == 'checkbox') {
+        $name = $e->getName().'[]';
+        $values = $e->getValue();
+    } else {
+        $name = $e->getName();
+        $values = array(0 => $e->getValue());
+    }
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
+    $attributes_string = 'name="'.$name.'"';
+    
+    $attributes = $e->getAttributes();
+    unset($attributes['name']);
+    if(isset($attributes['required'])) unset($attributes['required']);
+    if(isset($attributes['id'])) unset($attributes['id']);
+    
+    foreach($attributes as $key => $value){
+        $attributes_string .= ' '.$key.'="'.$value.'"';
+    }   
+?>
+<div class="<?=(isset($extended['vertical']) ? 'vertical_check_box' : 'compact_check_box')?>">
+	<div class="form-group radio_style">
+                <?= $renderer->formLabel($e) ?>
+		<?php echo $renderer->formElement($e); ?>
+		<?php if($err) { ?>
+		<ul>
+		<?php foreach($err as $k => $v) { ?>
+			<li><?php if($labelHelperTranlator) { 
+				echo $labelHelperTranlator->translate($v, $labelHelper->getTranslatorTextDomain());
+			} else {
+				echo $v;
+			} ?></li>
+		<?php } ?>
+		</ul>
+		<?php } ?>
+	</div>
+</div>

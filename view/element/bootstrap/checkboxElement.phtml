@@ -1,0 +1,60 @@
+<?php
+    $e = $this->element;
+    $label = $this->translate($e->getLabel());
+    $extended = $e->getOption('extended');
+    if($e->getAttribute('type') == 'multi_checkbox') {
+        $e->setAttribute('type', 'checkbox');
+        $name = $e->getName().'[]';
+        $values = $e->getValue();
+    } else {
+        $name = $e->getName();
+        $values = array(0 => $e->getValue());
+    }
+    $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    
+    $attributes_string = 'name="'.$name.'"';
+    
+    $attributes = $e->getAttributes();
+    unset($attributes['name']);
+    if(isset($attributes['required'])) unset($attributes['required']);
+    if(isset($attributes['id'])) unset($attributes['id']);
+    
+    foreach($attributes as $key => $value){
+        $attributes_string .= ' '.$key.'="'.$value.'"';
+    }
+    
+    $type = $e->getAttribute('type');
+    
+    $classes = "";
+    if($type == 'radio') $classes = 'radio-custom radio-inline';
+    else $classes = 'checkbox-custom checkbox-inline';
+    
+    if(!isset($extended['help'])){
+        $extended['help'] = array('content' => '&nbsp;');
+    }
+?>
+<div class="elementWrapper">
+<div class="radio-inline-container">
+<?php $options = $e->getOptions(); foreach($options['value_options'] as $value => $key) { 
+	$id_element = ($type == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));?>
+        <div class="<?=$classes?>">
+            <input <?=$attributes_string?> 
+                       value="<?= $value; ?>" 
+                       <?php if(is_array($values) && in_array($value, $values)){ echo 'checked="checked"'; } ?> 
+                       id="<?=$id_element?>">
+            <label style="margin-left: -1px" for="<?=$id_element?>">
+                <?=$this->translate($key)?> 
+            </label>
+        </div>
+<?php } ?>
+</div>
+<?php if($err) { ?>
+<ul>
+<?php foreach($err as $k => $v) { ?>
+    <li>
+        <?=$this->translate($v);?>
+    </li>
+<?php } ?>
+</ul>
+<?php } ?>
+</div>

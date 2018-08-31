@@ -5,9 +5,7 @@
     $required = ($e->getAttribute('required') == 'required') ? 'required="required"' : false;
     $maxlengh = $e->getAttribute('maxlength');
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
-    $id = $e->getAttribute('name');
-    $e->setAttribute('id', $id);
-    
+    $id = $e->getAttribute('id');    
 ?>
 <div class="form-group <?php if($err){ echo "error";} ?>" <?php if(isset($extended['hidden']) && $extended['hidden']) { echo ' style="display:none;"'; } ?>>
     <?php if(isset($extended['key'])): ?>

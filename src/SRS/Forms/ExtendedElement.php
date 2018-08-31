@@ -58,8 +58,9 @@ class ExtendedElement extends Element implements ExtendedElementInterface
     public function injectGlobalConfig($config)
     {
         if (is_array($config)) {
-            if(is_array($this->getOption('extended')))
+            if(is_array($this->getOption('extended'))){
                 $this->localConfig = array_replace_recursive($config, $this->getOption('extended'));
+            }
             
             if(isset($config['extended']) AND is_array($config['extended'])) {
                 unset($this->localConfig['extended']);
