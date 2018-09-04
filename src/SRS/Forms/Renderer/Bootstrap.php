@@ -21,7 +21,12 @@ class Bootstrap extends Renderer
         }
         
         if ($element->getAttribute('type') == 'multi_checkbox' || $element->getAttribute('type') == 'radio') {
-            return $this->view->partial('bootstrap/checkboxElement.phtml', ['element' => $element]);
+            $options = $element->getOptions();
+            if(isset($options['form_style']) && $options['form_style'] == 'vertical'){
+                return $this->view->partial('bootstrap/checkboxVerticalElement.phtml', ['element' => $element]);
+            }else{
+                return $this->view->partial('bootstrap/checkboxElement.phtml', ['element' => $element]);
+            }
         }
         
         if ($element->getAttribute('type') == 'select' || $element instanceof \DoctrineModule\Form\Element\ObjectSelect) {
@@ -31,6 +36,8 @@ class Bootstrap extends Renderer
         if ($element->getAttribute('type') == 'textarea') {
             return $this->view->partial('bootstrap/textareaElement.phtml', ['element' => $element]);
         }
+        
+        
 
         return $this->view->partial('bootstrap/inputElement.phtml', ['element' => $element]);
     }
@@ -41,27 +48,12 @@ class Bootstrap extends Renderer
             $this->initExtendedElement($element);
         }
         
-        if ($element instanceof ExtendedElement && $element->getTemplate()) {
-            return $this->view->partial('bootstrap/' . $element->getTemplate().'FormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-        
-        if ($element->getAttribute('type') == 'checkbox'){
-                return $this->view->partial('bootstrap/singleCheckboxFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-        
-        if ($element->getAttribute('type') == 'multi_checkbox' || $element->getAttribute('type') == 'radio') {
-            return $this->view->partial('bootstrap/checkboxFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-        
-        if ($element->getAttribute('type') == 'select' || $element instanceof \DoctrineModule\Form\Element\ObjectSelect) {
-            return $this->view->partial('bootstrap/selectFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
-        }
-        
-        if ($element->getAttribute('type') == 'textarea') {
-            return $this->view->partial('bootstrap/textareaFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+        if ($element instanceOf ExtendedElement && $element->getTemplate() == "sheepitduplicator") {
+            
+            return $this->view->partial('bootstrap/sheepitduplicatorElement.phtml', ['element' => $element, 'renderer' => $this]);
         }
 
-        return $this->view->partial('bootstrap/inputFormGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
+        return $this->view->partial('bootstrap/formGroup.phtml', ['element' => $element, 'renderer' => $this, 'showLabel' => $showLabel]);
     }
     
     

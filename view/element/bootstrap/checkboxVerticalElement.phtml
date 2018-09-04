@@ -8,7 +8,7 @@
         $values = $e->getValue();
     } else {
         $name = $e->getName();
-        $values = array(0 => $e->getValue());
+        $values = [0 => $e->getValue()];
     }
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
     
@@ -35,15 +35,15 @@
 ?>
 <div class="elementWrapper">
 <div class="radio-inline-container">
-<?php $options = $e->getOptions(); foreach($options['value_options'] as $value => $key) { 
+<?php $options = $e->getOptions(); foreach($options['value_options'] as $value => $label) { 
 	$id_element = ($type == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));?>
-        <div class="<?=$classes?>">
-            <input <?=$attributes_string?> 
-                       value="<?= $value; ?>" 
-                       <?php if(is_array($values) && in_array($value, $values, true)){ echo 'checked="checked"'; } ?> 
-                       id="<?=$id_element?>">
-            <label style="margin-left: -1px" for="<?=$id_element?>">
-                <?=$this->translate($key)?> 
+        <div class="radio">
+            <label>
+                <input <?=$attributes_string?> 
+                    value="<?= $value; ?>" 
+                    <?php if(is_array($values) && in_array($value, $values, true)){ echo 'checked="checked"'; } ?> 
+                    id="<?=$id_element?>">
+                <?=$this->translate($label)?>
             </label>
         </div>
 <?php } ?>

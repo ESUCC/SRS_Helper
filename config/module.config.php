@@ -53,12 +53,25 @@ return [
                 "allowAddN" => true,
                 "maxFormsCount" => 10,
                 "insertNewForms" => '"before"',
-                //"afterAdd" => 'function(source, newForm){ $("input", newForm).not(".noStyle").iCheck(window.icheck);}',
                 "afterRemoveCurrent" => '""',
                 "indexFormat" => "'m_index_m'",
             ]
         ],
-        
+        \SRS\Forms\Element\TinyMCE::class => [
+            'js' => [
+                
+            ],
+            'css' => [
+                
+            ],
+            'template' => 'textarea',
+            'inlineJs' => "
+                tinymce.init(%2\$s);
+            ",
+            'inlineJsConfig' => [
+                
+            ]
+        ],
         \SRS\Forms\Element\DatePicker::class => [
             'template' => 'datepicker',
             'extended' => [
@@ -74,6 +87,7 @@ return [
                 hideOnBlur: true,
                 likeXDSoftDateTimePicker: true,
                 formatDecoreDateWithYear: $('#%1\$s').attr('data-date-format'),
+                fullsizeOnDblClick: false,
                 formatDate: $('#%1\$s').attr('data-date-format')
             });"
         ]

@@ -79,12 +79,28 @@
     width: 100%;
 }
 
+.mb0{
+    margin-bottom: 0px;
+}
+
+.mb10{
+    margin-bottom: 10px;
+}
+
 .mt5{
     margin-top: 5px;
 }
 
 .pr10{
     padding-right: 10px;
+}
+
+.p0{
+    padding:0px;
+}
+
+.pr1{
+    padding-right:1px;
 }
 
 label.control-label{
