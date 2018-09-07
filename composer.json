@@ -3,7 +3,7 @@
     "description": "Rendering ZF3 forms with viewscripts. It can be extended to render with other frameworks then Twitter Bootstrap.",
     "minimum-stability": "dev",
     "type" : "module",
-    "homepage" : "git@github.com:ESUCC/SRS_Helper.git",
+    "homepage" : "https://github.com/ESUCC/SRS_Helper.git",
     "keywords" : ["form", "zf2", "module", "uniForm"],
     "license" : "MIT",
     "authors": [
@@ -23,5 +23,8 @@
         "classmap": [
             "./"
         ]
+    },
+    "require-dev": {
+        "zfcampus/zf-asset-manager": "^1.2@dev"
     }
 }
