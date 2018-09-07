@@ -23,8 +23,5 @@
         "classmap": [
             "./"
         ]
-    },
-    "require-dev": {
-        "zfcampus/zf-asset-manager": "^1.2@dev"
     }
 }
