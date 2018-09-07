@@ -101,4 +101,11 @@ return [
             'renderer.bootstrap' => SRS\Forms\Renderer\Bootstrap::class,
         ],
     ],
+    'asset_manager' => [
+        'resolver_configs' => [
+            'paths' => [
+                __DIR__ . '/../assets/'
+            ],
+        ],
+    ],
 ];
