@@ -4,7 +4,19 @@
     $label = $this->translate($e->getLabel());
     $extended = $e->getOption('extended');
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
+    $showInPanel = $e->getOption('showInPanel');
+    $id = $e->getAttribute('id');
 ?>
+<?php if($showInPanel): ?>
+<div class="panel panel-default gutters-7 form-group">
+    <div class="panel-heading active">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#<?=$id?>_panel" href="javascript:;"><?=$label?></a>
+        </h4>
+    </div>
+    <div id="<?=$id?>_panel" class="panel-collapse collapse in">
+        <div class="panel-body p0 pr1">                
+<?php endif; ?>
 <div class="elementWrapper">
     <?php echo $this->formTextarea($e);
     if(isset($extended['help'])):?>
@@ -22,3 +34,9 @@
 </span>
     <?php } ?>
 </div>
+<?php if($showInPanel): ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
