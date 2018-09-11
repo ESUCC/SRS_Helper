@@ -49,6 +49,7 @@ return [
                 "allowRemoveLast" => true,
                 "allowRemoveCurrent" => true,
                 "allowRemoveAll" => true,
+                "iniFormsCount" => 0,
                 "allowAdd" => true,
                 "allowAddN" => true,
                 "maxFormsCount" => 10,

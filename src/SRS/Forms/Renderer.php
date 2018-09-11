@@ -347,16 +347,19 @@ class Renderer
     }
     
     protected function initExtendedElement($element){
-        if(!$element->getOption('extended')){
-            $element->setOption('extended', []);
-        }
+        if(!$element->inialized_Extended){
+            if(!$element->getOption('extended')){
+                $element->setOption('extended', []);
+            }
 
-        if(isset($this->globalFormConfig[get_class($element)])){
-            $element->injectGlobalConfig(
-                $this->globalFormConfig[get_class($element)]
-            );
+            if(isset($this->globalFormConfig[get_class($element)])){
+                $element->injectGlobalConfig(
+                    $this->globalFormConfig[get_class($element)]
+                );
+            }
+            $this->extractExtendedElementData($element);
+            $element->injectSettings($this->getSettings());
+            $element->inialized_Extended = true;
         }
-        $this->extractExtendedElementData($element);
-        $element->injectSettings($this->getSettings());
     }
 }

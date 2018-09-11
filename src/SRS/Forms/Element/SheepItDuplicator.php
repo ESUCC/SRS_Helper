@@ -37,8 +37,6 @@ class SheepItDuplicator extends ExtendedElement
                     $this->init_data .= 'else{'
                             . '$("input[name=\''.$this->getName().'['.$template.']['.$i.']['.$key.']\'][value!=\''.preg_replace( "/\r|\n/", "", $value).'\']").removeAttr("checked");'
                             . '$("input[name=\''.$this->getName().'['.$template.']['.$i.']['.$key.']\'][value=\''.preg_replace( "/\r|\n/", "", $value).'\']").attr("checked", "checked");'
-                            . '$("input[name=\''.$this->getName().'['.$template.']['.$i.']['.$key.']\'][value=\''.preg_replace( "/\r|\n/", "", $value).'\']").iCheck("check");'
-                            . '$("input[name=\''.$this->getName().'['.$template.']['.$i.']['.$key.']\']").iCheck("update");'
                             . '}';
                     }
                 }

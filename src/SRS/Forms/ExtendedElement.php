@@ -11,7 +11,8 @@ class ExtendedElement extends Element implements ExtendedElementInterface
     public $settings = array();
     protected $serviceManager;
     protected $custom_inlineConfig = array();
-
+    public $inialized_Extended = false;
+    
     public function getJs()
     {
         return (isset($this->localConfig['js'])) ? $this->localConfig['js'] : false;
