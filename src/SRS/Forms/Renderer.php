@@ -157,23 +157,29 @@ class Renderer
                 }
             }
 
-            $inlineJs = $element->getInlineJs();
-            if (strlen($inlineJs) > 0) {
-                $script = sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig()));
-                
-                preg_match_all('/"function[^"]*"/', $script, $matches);
-                if(isset($matches[0])){
-                    foreach($matches[0] as $match){
-                        $script = str_replace($match, str_replace('\\u0027', "'", substr($match, 1, -1)), $script);
-                    }
-                }
-
-                $this->view->placeholder($this->getJsHolderName())
-                    ->append($script);
+            $script = $this->getJsElement($element);
+            if($script){
+                $this->view->placeholder($this->getJsHolderName())->append($script);
             }
-
         }
 
+    }
+    
+    public function getJsElement($element){
+        $script = "";
+        $inlineJs = $element->getInlineJs();
+        if (strlen($inlineJs) > 0) {
+            $script = sprintf($inlineJs, $element->getAttribute('id'), JsConfigRenderer::encode($element->getInlineJsConfig()));
+
+            preg_match_all('/"function[^"]*"/', $script, $matches);
+            if(isset($matches[0])){
+                foreach($matches[0] as $match){
+                    $script = str_replace($match, str_replace('\\u0027', "'", substr($match, 1, -1)), $script);
+                }
+            }
+        }
+        
+        return $script;
     }
 
     public function normalizeElement($element)

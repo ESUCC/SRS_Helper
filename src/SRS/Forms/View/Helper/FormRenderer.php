@@ -28,6 +28,7 @@ class FormRenderer extends AbstractHelper
         
         $this->view->headScript()
                 ->appendFile($this->view->basePath('/js/libs/tinymce/js/tinymce/tinymce.min.js')."?v=".filemtime(getcwd()."/public/js/libs/tinymce/js/tinymce/tinymce.min.js"))
+                ->appendFile($this->view->basePath('/js/libs/tinymce/js/tinymce/jquery.tinymce.min.js')."?v=".filemtime(getcwd()."/public/js/libs/tinymce/js/tinymce/jquery.tinymce.min.js"))
                 ->appendFile($this->view->basePath('/js/libs/jquery.sheepItPlugin.min.js')."?v=".filemtime(getcwd()."/public/js/libs/jquery.sheepItPlugin.min.js"))
                 ->appendFile($this->view->basePath('/js/libs/jquery.periodpicker/build/jquery.periodpicker.full.min.js')."?v=".filemtime(getcwd()."/public/js/libs/jquery.periodpicker/build/jquery.periodpicker.full.min.js"))
                 ->appendFile($this->view->basePath('/js/srs_forms.js')."?v=".filemtime(getcwd()."/public/js/srs_forms.js"));

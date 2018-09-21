@@ -23,12 +23,12 @@ class TinyMCE extends ExtendedElement
               'searchreplace visualblocks code fullscreen',
               'insertdatetime media table contextmenu paste code help wordcount'
             ]");
-                $this->setInlineJsConfig('toolbar', "'undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | print | help'");
+                $this->setInlineJsConfig('toolbar', "'undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | print | help | nanospell'");
+                $this->setInlineJsConfig('external_plugins', '{"nanospell": "/js/libs/tinymce/js/tinymce/plugins/nanospell/plugin.js"}');
+                $this->setInlineJsConfig('nanospell_server', '"php"');
+                $this->setInlineJsConfig('nanospell_autostart', 'false');
             break;
         }
-        
-        $this->setInlineJsConfig('selector', "'#".$name."'");
-        
     }
     
     public function setMinHeight($height){

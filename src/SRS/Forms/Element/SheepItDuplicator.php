@@ -22,11 +22,12 @@ class SheepItDuplicator extends ExtendedElement
         if($init_data){
             $this->init_data = "$(document).ready(function(){";
             $this->init_data .= 'window.'.$this->getName().'_sheepit_obj.addNForms('.count($init_data).');';
-            for($i = 0; $i < count($init_data); $i++){
-                $template = $init_data[$i]['template'];
-                unset($init_data[$i]['template']);
+            for($i = 1; $i <= count($init_data); $i++){
+                $template = $init_data[$i-1]['template'];
+                unset($init_data[$i-1]['template']);
                 
-                foreach($init_data[$i] as $key => $value){
+                foreach($init_data[$i-1] as $key => $value){
+                    $value = str_replace('"', '\"', $value);
                     if($value != ""){
                     $this->init_data .= 'if($("input[name=\''.$this->getName().'['.$template.']['.$i.']['.$key.']\']").length == 1 '
                             . '|| $("select[name=\''.$this->getName().'['.$template.']['.$i.']['.$key.']\']").length == 1'
