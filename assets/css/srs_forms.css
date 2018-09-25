@@ -83,6 +83,10 @@
     margin-bottom: 0px;
 }
 
+.mb5{
+    margin-bottom: 5px;
+}
+
 .mb10{
     margin-bottom: 10px;
 }
@@ -110,4 +114,15 @@ label.control-label{
 .elementWrapper input[type="checkbox"]{
     width:16px;
     height: 16px;
+}
+
+.control-label.required:before {
+    content: '*';
+    padding-right: 2px;
+    color: red;
+    font-size: 10px;
+}
+
+label.error{
+    color:rgb(243, 68, 72);
 }

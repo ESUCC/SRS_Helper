@@ -9,12 +9,17 @@ class SheepItDuplicator extends ExtendedElement
     protected $init_data = null;
     protected $disabled = false;
     protected $default_selector = "";
+    public $note = "";
     
     public function __construct($name = null, $options = []){
         parent::__construct($name, $options);
         
         $this->setAttribute('id', $name);
 
+    }
+    
+    public function addNote($note){
+        $this->note = $note;
     }
     
     public function initData($init_data = null){

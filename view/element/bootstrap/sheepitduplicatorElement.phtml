@@ -13,6 +13,8 @@
     if($e->getAttribute('disabled') === "true"){
      //   $e->setDisabled(true);
     }
+    
+    $note = $element->note;
 ?>
 
 
@@ -44,6 +46,11 @@
         </div>
         <div id="<?=$e->getName()?>" class="panel-collapse collapse in">
             <div class="panel-body">
+                <?php if($note):?>
+                <div class="notes">
+                    <?=$note?>
+                </div>
+                <?php endif; ?>
                 <input type="hidden" name="<?=$e->getName()?>_active" value="<?=($e->getDisabled() ? 0 : 1)?>"/>
                 <?php echo $e->render($this); ?>
                 <div style="margin:8px;" id="<?=$e->getName()?>_noforms_template">No registers found</div>

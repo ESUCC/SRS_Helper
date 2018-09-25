@@ -39,7 +39,7 @@ class Renderer
         return $this;
     }
 
-    public function setForm(Form $form)
+    public function setForm($form)
     {
         $this->_form = $form;
         $this->_form->setAttribute('novalidate', 'novalidate');

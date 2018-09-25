@@ -91,6 +91,24 @@ return [
                 fullsizeOnDblClick: false,
                 formatDate: $('#%1\$s').attr('data-date-format')
             });"
+        ],
+        \SRS\Forms\Element\PeriodPicker::class => [
+            'template' => 'periodpicker',
+            'extended' => [
+                'date-format' => 'MM/DD/YYYY'
+            ],
+            'inlineJs' => "
+            $('#%1\$s').periodpicker({
+                withoutBottomPanel: true,
+                resizeButton: false,
+                fullsizeButton: false,
+                norange: true,
+                hideOnBlur: true,
+                likeXDSoftDateTimePicker: true,
+                formatDecoreDateWithYear: $('#%1\$s').attr('data-date-format'),
+                fullsizeOnDblClick: false,
+                formatDate: $('#%1\$s').attr('data-date-format')
+            });"
         ]
         
     ],
