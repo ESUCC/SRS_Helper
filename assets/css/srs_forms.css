@@ -123,6 +123,13 @@ label.control-label{
     font-size: 10px;
 }
 
-label.error{
-    color:rgb(243, 68, 72);
+.form-group.error label{
+    color: rgb(243, 68, 72);
 }
+
+.form-group.error select,
+.form-group.error input,
+.form-group.error textarea{
+    border-color: rgb(243, 68, 72);
+}
+
