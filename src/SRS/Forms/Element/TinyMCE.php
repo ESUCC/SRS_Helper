@@ -38,4 +38,21 @@ class TinyMCE extends ExtendedElement
     protected $attributes = array(
         'type' => 'tinymce',
     );
+
+    /**
+    *
+    * Override disabled attribute for TinyMCE. The rest attributes applied natively
+    *
+    */
+    public function setAttribute($key, $value)
+    {
+        if ($key == 'disabled')
+        {
+            $this->setInlineJsConfig('readonly', $value);
+        }
+        else
+        {
+            parent::setAttribute($key, $value);
+        }
+    }
 }
