@@ -26,7 +26,7 @@ class TinyMCE extends ExtendedElement
                 $this->setInlineJsConfig('toolbar', "'undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | print | help | nanospell'");
                 $this->setInlineJsConfig('external_plugins', '{"nanospell": "/js/libs/tinymce/js/tinymce/plugins/nanospell/plugin.js"}');
                 $this->setInlineJsConfig('nanospell_server', '"php"');
-                $this->setInlineJsConfig('nanospell_autostart', 'false');
+                $this->setInlineJsConfig('nanospell_autostart', 'true');
             break;
         }
     }

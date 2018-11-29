@@ -89,7 +89,8 @@ return [
                 likeXDSoftDateTimePicker: true,
                 formatDecoreDateWithYear: $('#%1\$s').attr('data-date-format'),
                 fullsizeOnDblClick: false,
-                formatDate: $('#%1\$s').attr('data-date-format')
+                formatDate: $('#%1\$s').attr('data-date-format'),
+                dayOfWeekStart: 7
             });"
         ],
         \SRS\Forms\Element\PeriodPicker::class => [
