@@ -91,7 +91,7 @@ return [
                 fullsizeOnDblClick: false,
                 formatDate: $('#%1\$s').attr('data-date-format'),
                 dayOfWeekStart: 7
-            });"
+            }); $('#%1\$s').removeClass('changed');"
         ],
         \SRS\Forms\Element\PeriodPicker::class => [
             'template' => 'periodpicker',

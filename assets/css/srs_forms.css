@@ -34,15 +34,15 @@
 }
 .panel-title > a, 
 .panel-title>a:active{
-    display:block;
-    padding:10px;
-    color:#555;
-    font-size:16px;
-    font-weight:bold;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    word-spacing:3px;
-    text-decoration:none;
+    display: block;
+    padding: 10px;
+    color: #555;
+    font-size: 11pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    text-decoration: none;
+    font-family: Vedana;
 }
 .panel-heading a:before {
    font-family: 'Glyphicons Halflings';

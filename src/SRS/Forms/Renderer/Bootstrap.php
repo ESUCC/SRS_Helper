@@ -48,6 +48,11 @@ class Bootstrap extends Renderer
             $this->initExtendedElement($element);
         }
         
+        if ($element->getAttribute('type') == 'checkbox'){
+                return $this->view->partial('bootstrap/singleCheckboxFormGroup.phtml', ['element' => $element]);
+        }
+        
+        
         if ($element instanceOf ExtendedElement && $element->getTemplate() == "sheepitduplicator") {
             
             return $this->view->partial('bootstrap/sheepitduplicatorElement.phtml', ['element' => $element, 'renderer' => $this]);
