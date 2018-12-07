@@ -18,7 +18,11 @@ class DatePicker extends ExtendedElement
         
         
         if(!isset($extended['date-format'])){
-            $extended['date-format'] = 'mm/dd/yyyy';
+            $extended['date-format'] = 'MM/DD/YYYY';
+        }
+        
+        if(!isset($extended['placement'])){
+            $extended['placement'] = 'bottom';
         }
         
         $this->setOption('extended', $extended);

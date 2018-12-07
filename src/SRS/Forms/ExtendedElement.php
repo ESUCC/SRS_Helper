@@ -70,7 +70,8 @@ class ExtendedElement extends Element implements ExtendedElementInterface
 
         } else {
             $this->localConfig = $this->getOption('extended');
-        }      
+        }
+        
         if(isset($this->localConfig['inlineJsConfig'])){
             $this->localConfig['inlineJsConfig'] = array_merge($this->localConfig['inlineJsConfig'], $this->custom_inlineConfig);
         }

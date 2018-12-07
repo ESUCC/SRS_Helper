@@ -4,6 +4,7 @@
     $label = ($e->getLabel() ? $this->translate($e->getLabel()) : "");
     $extended = $e->getOption('extended');
     $date_format = $extended['date-format'];
+    $placement = $extended['placement'];
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
     if(!isset($extended['help'])){
         $extended['help'] = array('content' => '&nbsp;');
@@ -13,7 +14,10 @@
 ?>
 <div class="elementWrapper">
     <div class="input-group">
-        <input class="form-control" <?=(($e->getAttribute('disabled'))?('disabled'):(''))?> id="<?=$e->getAttribute('id')?>" name="<?=$e->getAttribute('name')?>" type="text" value="<?=$value?>" data-date-format="<?=$date_format?>">
+        <input class="form-control" <?=(($e->getAttribute('disabled'))?('disabled'):(''))?> id="<?=$e->getAttribute('id')?>" name="<?=$e->getAttribute('name')?>" type="text" value="<?=$value?>" 
+               data-placement="<?=$placement?>"
+               data-date-format="<?=$date_format?>"
+               >
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
         </span>

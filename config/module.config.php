@@ -76,7 +76,8 @@ return [
         \SRS\Forms\Element\DatePicker::class => [
             'template' => 'datepicker',
             'extended' => [
-                'date-format' => 'MM/DD/YYYY'
+                'date-format' => 'MM/DD/YYYY',
+                'placement' => 'bottom'
             ],
             'inlineJs' => "
             $('#%1\$s').periodpicker({
@@ -88,6 +89,7 @@ return [
                 hideOnBlur: true,
                 likeXDSoftDateTimePicker: true,
                 formatDecoreDateWithYear: $('#%1\$s').attr('data-date-format'),
+                placement: $('#%1\$s').attr('data-placement'),
                 fullsizeOnDblClick: false,
                 formatDate: $('#%1\$s').attr('data-date-format'),
                 dayOfWeekStart: 7
