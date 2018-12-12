@@ -1,6 +1,6 @@
 <?php
     $e = $this->element;
-    $e->setAttribute('class', 'form-control');
+    $e->setAttribute('class', $e->getAttribute('class').' form-control');
     $labelHelper = $this->formLabel();
     $label = $e->getLabel();
     $labelHelperTranlator = $labelHelper->getTranslator();
