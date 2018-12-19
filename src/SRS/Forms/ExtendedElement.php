@@ -7,10 +7,10 @@ use Zend\Form\Element;
 class ExtendedElement extends Element implements ExtendedElementInterface
 {
 
-    public $localConfig = array();
-    public $settings = array();
+    public $localConfig = [];
+    public $settings = [];
     protected $serviceManager;
-    protected $custom_inlineConfig = array();
+    protected $custom_inlineConfig = [];
     public $inialized_Extended = false;
     
     public function getJs()
@@ -75,8 +75,9 @@ class ExtendedElement extends Element implements ExtendedElementInterface
         if(isset($this->localConfig['inlineJsConfig'])){
             $this->localConfig['inlineJsConfig'] = array_merge($this->localConfig['inlineJsConfig'], $this->custom_inlineConfig);
         }
-        else
+        else{
             $this->localConfig['inlineJsConfig'] = $this->custom_inlineConfig;
+        }
 
     }
 

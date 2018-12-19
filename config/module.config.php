@@ -79,21 +79,20 @@ return [
                 'date-format' => 'MM/DD/YYYY',
                 'placement' => 'bottom'
             ],
-            'inlineJs' => "
-            $('#%1\$s').periodpicker({
-                withoutBottomPanel: true,
-                resizeButton: false,
-                fullsizeButton: false,
-                norange: true,
-                cells: [1, 1],
-                hideOnBlur: true,
-                likeXDSoftDateTimePicker: true,
-                formatDecoreDateWithYear: $('#%1\$s').attr('data-date-format'),
-                placement: $('#%1\$s').attr('data-placement'),
-                fullsizeOnDblClick: false,
-                formatDate: $('#%1\$s').attr('data-date-format'),
-                dayOfWeekStart: 7
-            }); $('#%1\$s').removeClass('changed');"
+            'inlineJsConfig' => [
+                'clearButtonInButton' => "true",
+                'resizeButton' => "false",
+                'fullsizeButton' => "false",
+                'norange' => "true",
+                'cells' => "[1, 1]",
+                'hideOnBlur' => "true",
+                'likeXDSoftDateTimePicker' => "true",
+                'formatDate' => "'MM/DD/YYYY'",
+                'formatDecoreDateWithYear' => "'MM/DD/YYYY'",
+                'fullsizeOnDblClick' => "false",
+                'dayOfWeekStart' => "7"
+            ],
+            'inlineJs' => "$('#%1\$s').periodpicker(%2\$s); $('#%1\$s').removeClass('changed');"
         ],
         \SRS\Forms\Element\PeriodPicker::class => [
             'template' => 'periodpicker',

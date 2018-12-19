@@ -26,11 +26,10 @@
     $id_element = ($e->getAttribute('type') == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));
 ?>
 <div class="elementWrapper">
-    <input <?=$attributes_string?> 
-           value="<?= $e->getCheckedValue() ?>" <?php if($value == $e->getCheckedValue()){ echo 'checked="checked"'; } ?> 
-           id="<?=$id_element?>">
-    
     <?php if($e->useHiddenElement()): ?>
         <input type="hidden" name="<?=$e->getName()?>" value="<?=$e->getUncheckedValue()?>">
     <?php endif; ?>
+    <input <?=$attributes_string?> 
+           value="<?= $e->getCheckedValue() ?>" <?php if($value == $e->getCheckedValue()){ echo 'checked="checked"'; } ?> 
+           id="<?=$id_element?>">
 </div>

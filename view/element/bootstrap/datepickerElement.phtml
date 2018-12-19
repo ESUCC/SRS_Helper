@@ -9,15 +9,15 @@
     if(!isset($extended['help'])){
         $extended['help'] = array('content' => '&nbsp;');
     }
-    
     $value = $e->getValue();
 ?>
+
 <div class="elementWrapper">
+    <?php if(isset($extended['custom_inlineConfig']['likeXDSoftDateTimePicker']) && $extended['custom_inlineConfig']['likeXDSoftDateTimePicker'] == 'false'):?>
+        <input class="form-control" <?=(($e->getAttribute('disabled'))?('disabled'):(''))?> id="<?=$e->getAttribute('id')?>" name="<?=$e->getAttribute('name')?>" type="text" value="<?=$value?>">
+    <?php else: ?>
     <div class="input-group">
-        <input class="form-control" <?=(($e->getAttribute('disabled'))?('disabled'):(''))?> id="<?=$e->getAttribute('id')?>" name="<?=$e->getAttribute('name')?>" type="text" value="<?=$value?>" 
-               data-placement="<?=$placement?>"
-               data-date-format="<?=$date_format?>"
-               >
+        <input class="form-control" <?=(($e->getAttribute('disabled'))?('disabled'):(''))?> id="<?=$e->getAttribute('id')?>" name="<?=$e->getAttribute('name')?>" type="text" value="<?=$value?>">
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
         </span>
@@ -33,5 +33,7 @@
             echo $this->translate($v);
         } ?>
     </span>
-<?php } ?>
+<?php } 
+endif;
+?>
 </div>

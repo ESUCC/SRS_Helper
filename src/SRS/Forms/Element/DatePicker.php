@@ -11,18 +11,13 @@ class DatePicker extends ExtendedElement
         
         $this->setAttribute('id', $name);
         
-        $extended = $this->getOption('extended');
-        if(!$extended){
-            $extended = [];
-        }
+        $extended = isset($options['extended']) ? $options['extended'] : [];
+        //print_r($extended);
         
-        
-        if(!isset($extended['date-format'])){
-            $extended['date-format'] = 'MM/DD/YYYY';
-        }
-        
-        if(!isset($extended['placement'])){
-            $extended['placement'] = 'bottom';
+        if(isset($extended['custom_inlineConfig'])){
+            foreach($extended['custom_inlineConfig'] as $key => $value){
+                $this->setInlineJsConfig($key, $value);
+            }
         }
         
         $this->setOption('extended', $extended);
