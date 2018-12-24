@@ -46,7 +46,7 @@
                                value="<?= $value; ?>" 
                                <?php if(is_array($values) && in_array($value, $values, true)){ echo 'checked="checked"'; } ?> 
                                id="<?=$id_element?>">
-                    <label style="margin-left: -1px" for="<?=$id_element?>">
+                    <label style="margin-left: -1px; padding-left:0px;" for="<?=$id_element?>">
                         <?=$this->translate($key)?> 
                     </label>
                 </div>
