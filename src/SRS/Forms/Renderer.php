@@ -119,8 +119,10 @@ class Renderer
             }
 
             $this->prepareRenderer();
-            $this->_form->setAttribute('class', $this->_form->getAttribute('class').' '.$class);
-            $this->_form->prepare();
+            if(is_a($this->_form, \Zend\Form\Form::class)){
+                $this->_form->setAttribute('class', $this->_form->getAttribute('class').' '.$class);
+                $this->_form->prepare();
+            }
             $this->prepared = true;
         }
     }
@@ -140,7 +142,6 @@ class Renderer
 
     public function extractExtendedElementData($element)
     {
-
         if ($element instanceOf ExtendedElement && $this->view) {
 
             $js = $element->getJs();
@@ -182,9 +183,9 @@ class Renderer
         return $script;
     }
 
-    public function normalizeElement($element)
+    public function normalizeElement($element, $force = false)
     {
-        if (!$element->getAttribute('id')) {
+        if (!$element->getAttribute('id') || $force) {
             $element->setAttribute('id', $this->getView()->slugify($element->getName()));
         }
     }
@@ -352,7 +353,7 @@ class Renderer
         return $this;
     }
     
-    protected function initExtendedElement($element){
+    public function initExtendedElement($element){
         if(!$element->inialized_Extended){
             if(!$element->getOption('extended')){
                 $element->setOption('extended', []);

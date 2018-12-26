@@ -11,6 +11,7 @@ class Bootstrap extends Renderer
         if($element instanceOf ExtendedElement) {
             $this->initExtendedElement($element);
         }
+        $this->normalizeElement($element);
         
         if ($element instanceOf ExtendedElement && $element->getTemplate()) {
             return $this->view->partial('bootstrap/' . $element->getTemplate().'Element.phtml', ['element' => $element, 'renderer' => $this]);

@@ -9,8 +9,6 @@ class TinyMCE extends ExtendedElement
     public function __construct($name = null, $options = []){
         parent::__construct($name, $options);
         
-        $this->setAttribute('id', $name);
-        
         if(!isset($options['mode'])){
             $options['mode'] = 'basic';
         }
