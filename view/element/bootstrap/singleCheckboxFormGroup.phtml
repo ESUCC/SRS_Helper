@@ -28,13 +28,13 @@
 <div class="elementWrapper">
     <div class="checkbox form-group <?php if($err){ echo "has-error";} ?>">
         <label>
-            <input <?=$attributes_string?> 
-               value="<?= $e->getCheckedValue() ?>" <?php if($value === $e->getCheckedValue()){ echo 'checked="checked"'; } ?> 
-               id="<?=$id_element?>">
-            <?= $e->getLabel() ?>
             <?php if($e->useHiddenElement()): ?>
                 <input type="hidden" name="<?=$e->getName()?>" value="<?=$e->getUncheckedValue()?>">
             <?php endif; ?>
+            <input <?=$attributes_string?> 
+               value="<?= $e->getCheckedValue() ?>" <?php if($value === $e->getCheckedValue()){ echo 'checked="checked"'; } ?> 
+               id="<?=$id_element?>">
+            <span class="text_label"><?= $e->getLabel() ?></span>
         </label>
     </div>
 </div>

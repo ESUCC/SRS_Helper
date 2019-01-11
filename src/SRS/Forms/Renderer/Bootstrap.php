@@ -44,7 +44,7 @@ class Bootstrap extends Renderer
     }
     
     public function formGroup($element, $showLabel = true){
-        
+        $this->normalizeElement($element);
         if($element instanceOf ExtendedElement) {
             $this->initExtendedElement($element);
         }

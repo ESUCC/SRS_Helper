@@ -67,7 +67,7 @@ return [
             ],
             'template' => 'textarea',
             'inlineJs' => "
-                console.log('#%1\$s'); console.log($('#%1\$s')); if($('#%1\$s').tinymce() != null) { $('#%1\$s').tinymce().remove(); } $('#%1\$s').tinymce(%2\$s);
+                if($('#%1\$s').tinymce() != null) { $('#%1\$s').tinymce().remove(); } $('#%1\$s').tinymce(%2\$s);
             ",
             'inlineJsConfig' => [
                 

@@ -167,6 +167,7 @@ class Renderer
     }
     
     public function getJsElement($element){
+        $this->normalizeElement($element);
         $script = "";
         $inlineJs = $element->getInlineJs();
         if (strlen($inlineJs) > 0) {
@@ -329,13 +330,13 @@ class Renderer
         return $this->escapeHtmlAttrHelper;
     }
     
-    private $makersoft_config = null;
+    private $srs_config = null;
     protected function getSRSConfig(){
-        return $this->makersoft_config;
+        return $this->srs_config;
     }
             
-    public function setSRSConfig($makersoft_config){
-        $this->makersoft_config = $makersoft_config;
+    public function setSRSConfig($srs_config){
+        $this->srs_config = $srs_config;
     }
     
     function getGlobalFormConfig() {

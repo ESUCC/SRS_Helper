@@ -5,6 +5,7 @@
     $extended = $e->getOption('extended');
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
     $showInPanel = $e->getOption('showInPanel');
+    $note = $e->getOption('note');
     $id = $e->getAttribute('id');
 ?>
 <?php if($showInPanel): ?>
@@ -16,6 +17,9 @@
     </div>
     <div id="<?=$id?>_panel" class="panel-collapse collapse in">
         <div class="panel-body pr2 p0">                
+            <?php if($note):?>
+            <div class="tinyMceNote"><?=$note?></div>
+            <?php endif; ?>
 <?php endif; ?>
 <div class="elementWrapper">
     <?php echo $this->formTextarea($e);

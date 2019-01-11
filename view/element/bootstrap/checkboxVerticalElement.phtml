@@ -26,8 +26,8 @@
     $type = $e->getAttribute('type');
     
     $classes = "";
-    if($type == 'radio') $classes = 'radio-custom radio-inline';
-    else $classes = 'checkbox-custom checkbox-inline';
+    if($type == 'radio'){ $classes = 'radio-custom radio-inline'; }
+    else{ $classes = 'checkbox-custom checkbox-inline'; }
     
     if(!isset($extended['help'])){
         $extended['help'] = array('content' => '&nbsp;');
