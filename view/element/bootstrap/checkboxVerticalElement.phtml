@@ -16,8 +16,8 @@
     
     $attributes = $e->getAttributes();
     unset($attributes['name']);
-    if(isset($attributes['required'])) unset($attributes['required']);
-    if(isset($attributes['id'])) unset($attributes['id']);
+    if(isset($attributes['required'])) { unset($attributes['required']); }
+    if(isset($attributes['id'])) { unset($attributes['id']); }
     
     foreach($attributes as $key => $value){
         $attributes_string .= ' '.$key.'="'.$value.'"';
@@ -41,7 +41,7 @@
             <label>
                 <input <?=$attributes_string?> 
                     value="<?= $value; ?>" 
-                    <?php if(is_array($values) && in_array($value, $values, true)){ echo 'checked="checked"'; } ?> 
+                    <?php if(is_array($values) && in_array((string)$value, $value)){ echo 'checked="checked"'; } ?> 
                     id="<?=$id_element?>">
                 <?=$this->translate($label)?>
             </label>

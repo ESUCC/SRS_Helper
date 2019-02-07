@@ -13,14 +13,20 @@
         $values = [0 => $e->getValue()];
     }
     
+    for($i = 0; $i < count($values); $i++){
+        if($values[$i] === null){
+            unset($values[$i]);
+        }
+    }
+    
     $err = (count($e->getMessages()) > 0) ? $e->getMessages() : false;
     
     $attributes_string = 'name="'.$name.'"';
     
     $attributes = $e->getAttributes();
     unset($attributes['name']);
-    if(isset($attributes['required'])) unset($attributes['required']);
-    if(isset($attributes['id'])) unset($attributes['id']);
+    if(isset($attributes['required'])){ unset($attributes['required']); }
+    if(isset($attributes['id'])){ unset($attributes['id']); }
     
     foreach($attributes as $key => $value){
         $attributes_string .= ' '.$key.'="'.$value.'"';
@@ -29,8 +35,8 @@
     $type = $e->getAttribute('type');
     
     $classes = "";
-    if($type == 'radio') $classes = 'radio-custom radio-inline';
-    else $classes = 'checkbox-custom checkbox-inline';
+    if($type == 'radio'){ $classes = 'radio-custom radio-inline'; }
+    else{ $classes = 'checkbox-custom checkbox-inline'; }
     
     if(!isset($extended['help'])){
         $extended['help'] = array('content' => '&nbsp;');
@@ -39,12 +45,12 @@
 <div class="elementWrapper">
     <div class="checkbox">
         <div class="radio-inline-container">
-        <?php foreach($options['value_options'] as $value => $key) { 
+        <?php foreach($options['value_options'] as $value => $key) {
                 $id_element = ($type == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));?>
                 <div class="<?=$classes?>">
                     <input <?=$attributes_string?> 
                                value="<?= $value; ?>" 
-                               <?php if(is_array($values) && in_array($value, $values, true)){ echo 'checked="checked"'; } ?> 
+                               <?php if($value !== null && is_array($values) && in_array($value, $values, true)){ echo 'checked="checked"'; } ?> 
                                id="<?=$id_element?>">
                     <label style="margin-left: -1px; padding-left:0px;" for="<?=$id_element?>">
                         <?=$this->translate($key)?> 

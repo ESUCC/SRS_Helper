@@ -32,7 +32,6 @@ class TinyMCE extends ExtendedElement
                 
                 $this->setInlineJsConfig('setup', 'function (editor) {
             editor.on("change", function () {
-                console.log("chage editor");
                 $(editor.getElement()).change();
             });
         }');
