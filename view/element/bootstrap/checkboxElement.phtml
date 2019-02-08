@@ -41,6 +41,14 @@
     if(!isset($extended['help'])){
         $extended['help'] = array('content' => '&nbsp;');
     }
+    
+    for($i = 0; $i < count($values); $i++){
+        $v = $values[$i];
+        if(is_bool($v)){
+            $v = $v ? 't' : 'f';
+        }
+        $values[$i] = $v;
+    }
 ?>
 <div class="elementWrapper">
     <div class="checkbox">
