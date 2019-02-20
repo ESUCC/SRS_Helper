@@ -54,6 +54,7 @@
     <div class="checkbox">
         <div class="radio-inline-container">
         <?php foreach($options['value_options'] as $value => $key) {
+                $value = is_int($value) ? (string)$value : $value;
                 $id_element = ($type == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));?>
                 <div class="<?=$classes?>">
                     <input <?=$attributes_string?> 

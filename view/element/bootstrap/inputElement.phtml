@@ -7,27 +7,31 @@
     if(!isset($extended['help'])){
         $extended['help'] = array('content' => '&nbsp;');
     }
-?>
-<div class="elementWrapper">
-<?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
-    <div class="input-group <?php if(isset($extended['prepend'])) { echo 'input-icon'; } ?>">
-    <?php } ?>    
-    <?php if(isset($extended['prepend'])) { ?><span class="input-group-addon"><?= $extended['prepend'] ?></span><?php } ?>
-    <?php echo $this->formInput($e); ?>
-    <?php if(isset($extended['append'])) { ?><span class="input-group-addon"><?= $extended['append'] ?></span><?php } ?>
-    <?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
-    </div>
-    <?php } ?>  
-    <span class="help-block" style="display:none;">
-        <?=$this->translate($extended['help']['content'])?>
-    </span>
     
-    
-    <?php if($err) { ?>
-    <span class="help-block with-errors" style="display:none;">
-    <?php foreach($err as $k => $v) { 
-            echo $this->translate($v);
-        } ?>
-    </span>
-<?php } ?>
-</div>
+    if($e->getAttribute('type') == 'hidden'): $value= $e->getValue(); ?>
+<input type="hidden" name="<?=$e->getName()?>" id="<?=$e->getAttribute('id')?>" value="<?= is_array($value) ? $value[0] : $value ?>"/>
+    <?php else: ?>
+        <div class="elementWrapper">
+        <?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
+            <div class="input-group <?php if(isset($extended['prepend'])) { echo 'input-icon'; } ?>">
+            <?php } ?>    
+            <?php if(isset($extended['prepend'])) { ?><span class="input-group-addon"><?= $extended['prepend'] ?></span><?php } ?>
+            <?php echo $this->formInput($e); ?>
+            <?php if(isset($extended['append'])) { ?><span class="input-group-addon"><?= $extended['append'] ?></span><?php } ?>
+            <?php if(isset($extended['append']) OR isset($extended['prepend'])) {?>
+            </div>
+            <?php } ?>  
+            <span class="help-block" style="display:none;">
+                <?=$this->translate($extended['help']['content'])?>
+            </span>
+
+
+            <?php if($err) { ?>
+            <span class="help-block with-errors" style="display:none;">
+            <?php foreach($err as $k => $v) { 
+                    echo $this->translate($v);
+                } ?>
+            </span>
+        <?php } ?>
+        </div>
+<?php endif; ?>

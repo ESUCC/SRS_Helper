@@ -36,12 +36,12 @@
 <div class="elementWrapper">
 <div class="radio-inline-container">
 <?php $options = $e->getOptions(); foreach($options['value_options'] as $value => $label) { 
-	$id_element = ($type == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id')));?>
+	$id_element = ($type == 'radio' ? $this->slugify($e->getAttribute('id').'-'.$value) : $this->slugify($e->getAttribute('id'))); ?>
         <div class="radio">
             <label>
                 <input <?=$attributes_string?> 
                     value="<?= $value; ?>" 
-                    <?php if(is_array($values) && in_array((string)$value, $value)){ echo 'checked="checked"'; } ?> 
+                    <?php if(is_array($values) && in_array((string)$value, $values)){ echo 'checked="checked"'; } ?> 
                     id="<?=$id_element?>">
                 <?=$this->translate($label)?>
             </label>
