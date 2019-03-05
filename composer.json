@@ -1,5 +1,5 @@
 {
-    "name": "SRS/forms",
+    "name": "srs/forms",
     "description": "Rendering ZF3 forms with viewscripts. It can be extended to render with other frameworks then Twitter Bootstrap.",
     "minimum-stability": "dev",
     "type" : "module",
