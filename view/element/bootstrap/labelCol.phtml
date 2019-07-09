@@ -4,6 +4,8 @@
     $id_element = ($e->getAttribute('type') == 'radio' && isset($value) ? $e->getAttribute('id').'-'.$value : $e->getAttribute('id'));
     $colsLabel = $this->colsLabel;
 ?>
-<label class="control-label col-xs-<?=$colsLabel?> <?=($e->getAttribute('required') ? ' required' : '')?>" for="<?= $id_element ?>">
-    <?php if($label) { ?><?= $this->translate($label) ?><?php } else{ echo '&nbsp;'; }?>
-</label>
+<div class="col-xs-<?=$colsLabel?>">
+    <label class="control-label <?=($e->getAttribute('required') ? ' required' : '')?>" for="<?= $id_element ?>">
+        <?php if($label) { ?><?= $this->translate($label) ?><?php } else{ echo '&nbsp;'; }?>
+    </label>
+</div>

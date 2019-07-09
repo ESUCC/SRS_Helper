@@ -29,6 +29,7 @@ class TinyMCE extends ExtendedElement
                 $this->setInlineJsConfig('nanospell_autostart', 'true');
                 $this->setInlineJsConfig('images_upload_url', '"upload.php"');
                 $this->setInlineJsConfig('relative_urls', 'false');
+                $this->setInlineJsConfig('autoresize_on_init', 'false');
                 
                 $this->setInlineJsConfig('setup', 'function (editor) {
             editor.on("change", function () {
