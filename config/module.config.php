@@ -19,7 +19,7 @@ return [
     ],
     'form_elements' => [
         'factories' => [
-            //\SRS\Forms\Element\DatePicker::class => 
+            //\SRS\Forms\Element\DatePicker::class =>
         ]
     ],
     'view_manager' => [
@@ -35,10 +35,10 @@ return [
         ],
         \SRS\Forms\Element\SheepItDuplicator::class => [
             'js' => [
-                
+
             ],
             'css' => [
-                
+
             ],
             'template' => 'sheepitduplicator',
             'inlineJs' => "
@@ -60,39 +60,43 @@ return [
         ],
         \SRS\Forms\Element\TinyMCE::class => [
             'js' => [
-                
+
             ],
             'css' => [
-                
+
             ],
             'template' => 'textarea',
             'inlineJs' => "
                 if($('#%1\$s').tinymce() != null) { $('#%1\$s').tinymce().remove(); } $('#%1\$s').tinymce(%2\$s);
             ",
             'inlineJsConfig' => [
-                
+
             ]
         ],
         \SRS\Forms\Element\DatePicker::class => [
-            'template' => 'datepicker',
-            'extended' => [
-                'date-format' => 'MM/DD/YYYY',
-                'placement' => 'bottom'
-            ],
-            'inlineJsConfig' => [
-                'clearButtonInButton' => "true",
-                'resizeButton' => "false",
-                'fullsizeButton' => "false",
-                'norange' => "true",
-                'cells' => "[1, 1]",
-                'hideOnBlur' => "true",
-                'likeXDSoftDateTimePicker' => "true",
-                'formatDate' => "'MM/DD/YYYY'",
-                'formatDecoreDateWithYear' => "'MM/DD/YYYY'",
-                'fullsizeOnDblClick' => "false",
-                'dayOfWeekStart' => "7"
-            ],
-            'inlineJs' => "$('#%1\$s').periodpicker(%2\$s); $('#%1\$s').removeClass('changed');"
+          'template' => 'datepicker',
+          'extended' => [
+              'date-format' => 'MM/DD/YYYY',
+              'placement' => 'bottom'
+          ],
+          'inlineJsConfig' => [
+              'likeXDSoftDateTimePicker' => "true",
+              'norange' => "true",
+              'cells' => "[1, 1]",
+              'withoutBottomPanel' => "true",
+              'yearsLine' => "false",
+              'title' => "false",
+              'closeButton' => "false",
+              'resizeButton' => "false",
+              'fullsizeButton' => "false",
+              'formatDate' => "'MM/DD/YYYY'",
+              'formatDecoreDateWithYear' => "'MM/DD/YYYY'",
+              'dayOfWeekStart' => "7",
+              'hideAfterSelect' => "true",
+              'mousewheel' => "false",
+          ],
+          'inlineJs' => "$('#%1\$s').periodpicker(%2\$s).mask('99/99/9999'); $('#%1\$s').removeClass('changed');"
+      ],
         ],
         \SRS\Forms\Element\PeriodPicker::class => [
             'template' => 'periodpicker',
@@ -112,7 +116,7 @@ return [
                 formatDate: $('#%1\$s').attr('data-date-format')
             });"
         ]
-        
+
     ],
     'service_manager' => [
         'shared' => [
