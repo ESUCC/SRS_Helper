@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"  MaintainScrollPositionOnPostback="false" StylesheetTheme="" Theme="" EnableTheming="false"  ValidateRequest="false"  %><%@ OutputCache Location="None" VaryByParam="None" %><script type="text/C#" runat="server">
   protected void Page_Init(object sndr, EventArgs e)
     {
-       Response.Write(TinyMCESpell.RPC.HandlePostRequest(Context));   
+       Response.Write(NanoSpell.RPC.HandlePostRequest(Context));   
        Response.Flush();
        Response.End();
     }                                                                                                

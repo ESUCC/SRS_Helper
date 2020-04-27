@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="description" content="">
       <meta name="author" content="">
-      <title>Installing NanoSpell Spellchecker for TinyMCE - Step By Step Helper</title>
+      <title>Installing NanoSpell Spellchecker for CKEditor - Step By Step Helper</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
       <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
       <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
@@ -19,8 +19,12 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
       <![endif]-->
-      <script src="server/installer/test.js"></script>
-      <script src="https://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+      <script src="server/installer/test-cke.js"></script>
+      <script src="https://cdn.ckeditor.com/4.4.5.1/standard/ckeditor.js"></script>
+      <script src="autoload.js"></script>
+
+      
+ 
    </head>
    <body>
       <div class="metacontainer">
@@ -29,8 +33,11 @@
                <h1>nano<strong>spell</strong></h1>
             </div>
          </div>
+		 
+	 
+		 
          <div class="container">
-            <h2> TinyMCE Spellchecking Plugin Installation Helper</h2>
+            <h2> CKEditor Spell Check Plugin Installation Helper</h2>
             <p class='lead'>This page helps you to ensure that NanoSpell is set-up correctly, de-bugs issues before they arise, and provides customized code samples.  </p>
             <p><a class="btn btn-default" id='runbtn' href="#results-meta" role="button" onclick="runTests(); return false;">Run The Test &raquo;</a></p>
          </div>
@@ -42,6 +49,9 @@
                <p>This page needs to be running while you are connected to the internet.  Please connect to the internet and re-run the test.</p>
                <p><small>Your data is never sent to other servers, but we need to load jQuery and Bootstrap libraries from CDN servers to keep the installer package small and lightweight.</small></p>
             </div>
+			
+             
+			
             <div class="alert alert-danger"  id='warn_protocol'>
                <p>For this software to run, it needs to be located on a web server using http:// or https:// protocols.</p>
                <p><small>Currently you are viewing this page using the file:// protocol.  When your site is  running on a web-server, testing server or localhost - please re-run this page.</small></p>
@@ -64,30 +74,33 @@
                      <div class="tab-content">
                         <div class="tab-pane" id="php">
                            <h2>Setup NanoSpell using PHP</h2>
-                           <p>This option will instruct NanoSpell to use PHP to perform all of the TinyMCE spellchecking operations.</p>
+                           <p>This option will instruct NanoSpell to use PHP to perform all of the CKEditor spellchecking operations.</p>
                            <hr/>
                            <div id='php_results'>
                            </div>
                            <hr/>
                            <div  id='php_live' style='display:none'>
                               <h4>Live Example using PHP</h4>
-                              <textarea style='height:185px'>Helllo Worlb! PHP is working!</textarea>
+                              <textarea id='php_live_textarea' style='height:185px'>Helllo Worlb! PHP is working!</textarea>
                               <hr/>
                               <h4>Example Code</h4>
-							<p><small>Use javascript code like this when initializing TinyMCE within your pages to add the spellchecker.</small> </p>
+							<p><small>Use javascript code like this when initializing CKEditor within your pages to add the spellchecker.</small> </p>
 
-                              <pre>tinymce.init({ 
- selector:'textarea',  
- external_plugins: { "nanospell": "<span class='dynamic_url_for_plugin'>path/to/nanospell/plugin.js</span>" },
- nanospell_server:"php"
-});</pre>
+
+<pre>
+&lt;script src=&quot;<span class='dynamic_url_for_plugin'>path/to/</span>nanospell/autoload.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  nanospell.ckeditor(&#x27;all&#x27;,{server : &quot;<b>php</b>&quot;}); 
+&lt;/script&gt;</pre>
+							<p> There is also a toolbar button "Nanospell" which can be used to turn the spellcheck on and off.</p>
                               <hr/>
-                              <p>Read more about <span class="nano"><span>Nano</span>Spell</span> <a href="http://tinymcespellcheck.com/settings">settings</a> and <a href="http://tinymcespellcheck.com/dictionaries">dictionaries</a></p>
+                              <p>Read more about <span class="nano"><span>Nano</span>Spell</span> <a href="http://ckeditor-spellcheck.nanospell.com/plugin-settings">settings</a> and <a href="http://ckeditor-spellcheck.nanospell.com/ckeditor-spellchecking-dictionaries">dictionaries</a></p>
                            </div>
                         </div>
                         <div class="tab-pane" id="net">
                            <h2>Setup NanoSpell using ASP.Net or Mono</h2>
-                           <p>This option will instruct NanoSpell to use ASP.Net to perform all of the TinyMCE spellchecking operations.</p>
+                           <p>This option will instruct NanoSpell to use ASP.Net to perform all of the CKEditor spellchecking operations.</p>
                            <hr/>
                            <div id='net_results'>
                            </div>
@@ -97,20 +110,22 @@
                              <textarea style='height:185px'>Helllo Worlb! ASP.Net is working!</textarea>
                               <hr/>
                               <h4>Example Code</h4>
-							<p><small>Use javascript code like this when initializing TinyMCE within your pages to add the spellchecker.</small> </p>
+							<p><small>Use javascript code like this when initializing CKEditor within your pages to add the spellchecker.</small> </p>
 
-                              <pre>tinymce.init({ 
-	selector:'textarea',  
-	external_plugins: { "nanospell": "<span class='dynamic_url_for_plugin'>path/to/nanospell/plugin.js</span>" },
-	nanospell_server:"asp.net"
-});	</pre>
+<pre>
+&lt;script src=&quot;<span class='dynamic_url_for_plugin'>path/to/</span>nanospell/autoload.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  nanospell.ckeditor(&#x27;all&#x27;,{server : &quot;<b>asp.net</b>&quot;}); 
+&lt;/script&gt;</pre>
+						<p> There is also a toolbar button "Nanospell" which can be used to turn the spellcheck on and off.</p>
                               <hr/>
-                              <p>Read more about <span class="nano"><span>Nano</span>Spell</span> <a href="http://tinymcespellcheck.com/settings">settings</a> and <a href="http://tinymcespellcheck.com/dictionaries">dictionaries</a></p>
+                              <p>Read more about <span class="nano"><span>Nano</span>Spell</span> <a href="http://ckeditor-spellcheck.nanospell.com/plugin-settings">settings</a> and <a href="http://ckeditor-spellcheck.nanospell.com/ckeditor-spellchecking-dictionaries">dictionaries</a></p>
                            </div>
                         </div>
                         <div class="tab-pane" id="asp">
                            <h2>Setup NanoSpell using ASP VBScript</h2>
-                           <p>This option will instruct NanoSpell to use Microsoft Active Server Pages to perform all of the TinyMCE spellchecking operations.  If ASP.net is an option for you - we always recommend ASP.net over classic asp because it is a faster, more stable language.</p>
+                           <p>This option will instruct NanoSpell to use Microsoft Active Server Pages to perform all of the CKEditor spellchecking operations.  If ASP.net is an option for you - we always recommend ASP.net over classic asp because it is a faster, more stable language.</p>
                            <hr/>
                            <div id='asp_results'>
                            </div>
@@ -120,14 +135,16 @@
                                   <textarea style='height:185px'>Helllo Worlb! ASP Vbscript is working!</textarea>
                               <hr/>
                               <h4>Example Code</h4>
-<p><small>Use javascript code like this when initializing TinyMCE within your pages to add the spellchecker.</small> </p>
-                              <pre>tinymce.init({ 
-	selector:'textarea',  
-	external_plugins: { "nanospell": "<span class='dynamic_url_for_plugin'>path/to/nanospell/plugin.js</span>" },
-	nanospell_server:"asp"
-});	</pre>
+<p><small>Use javascript code like this when initializing CKEditor within your pages to add the spellchecker.</small> </p>
+<pre>
+&lt;script src=&quot;<span class='dynamic_url_for_plugin'>path/to/</span>nanospell/autoload.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  nanospell.ckeditor(&#x27;all&#x27;,{server : &quot;<b>asp</b>&quot;}); 
+&lt;/script&gt;</pre>
+							<p> There is also a toolbar button "Nanospell" which can be used to turn the spellcheck on and off.</p>
                               <hr/>
-                              <p>Read more about <span class="nano"><span>Nano</span>Spell</span> <a href="http://tinymcespellcheck.com/settings">settings</a> and <a href="http://tinymcespellcheck.com/dictionaries">dictionaries</a></p>
+                              <p>Read more about <span class="nano"><span>Nano</span>Spell</span> <a href="http://ckeditor-spellcheck.nanospell.com/plugin-settings">settings</a> and <a href="http://ckeditor-spellcheck.nanospell.com/ckeditor-spellchecking-dictionaries">dictionaries</a></p>
                            </div>
                         </div>
                         <div class="tab-pane" id="java">
@@ -143,3 +160,4 @@
 
    </body>
 </html>
+

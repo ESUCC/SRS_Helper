@@ -9,7 +9,7 @@ $post        = json_decode($rawPostData);
 require('lib.php');
 require('spellcheck.php');
 if (!$post->id) {
-	die("JSON Data sent in unexpected format for TinyMCE 4");
+	die("JSON Data sent in unexpected format for Nanospell");
 } //!$post->id
 if ($post->method == 'spellcheck') {
 	echo '{"id":"' . protect($post->id) . '","result": {';
