@@ -7,7 +7,7 @@ protected void Page_Init(object sndr, EventArgs e)
 
         foreach (System.Reflection.Assembly currentAssembly in AppDomain.CurrentDomain.GetAssemblies())
         {
-            if (currentAssembly.GetName().Name == "TinyMCESpell")
+            if (currentAssembly.GetName().Name == "NanoSpell")
             {
                 foundAssembly = true;
 				break;

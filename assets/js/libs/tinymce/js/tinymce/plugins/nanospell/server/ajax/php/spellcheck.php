@@ -17,6 +17,7 @@ $spellcheckObject -> LoadCustomBannedWords("language-rules/banned-words.txt");
 $spellcheckObject -> LoadEnforcedCorrections("language-rules/enforced-corrections.txt");
 $spellcheckObject -> LoadCommonTypos("language-rules/common-mistakes.txt");
 
+
 function protect($word){
 	$word = str_replace("<","&lt;",$word);
 	$word = str_replace(">","&gt;",$word);	

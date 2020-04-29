@@ -27,29 +27,29 @@ end if
 '################################################################################################################
 Set myJSON = JSON.parse(vntPostedData)  
 if(NOT Lcase(myJSON.method)  = "spellcheck") then RESPONSE.WRITE( "UNKNOWN COMMAND" ): RESPONSE.END()
-dim objTinyMceSpell
-Set objTinyMceSpell = ASPSpellObjectProvider.Create("aspspellcheck")
-	  objTinyMceSpell.ignoreCaseMistakes =false
-	  objTinyMceSpell.ignoreAllCaps = false
-	  objTinyMceSpell.IgnoreNumeric = false
-	  objTinyMceSpell.IgnoreEmailAddresses = false
-	  objTinyMceSpell.IgnoreWebAddresses = false
-	  objTinyMceSpell.newLineNewSentance = false
-	  objTinyMceSpell.LicenseKey = LicenseKey
+dim objNanoSpell
+Set objNanoSpell = ASPSpellObjectProvider.Create("aspspellcheck")
+	  objNanoSpell.ignoreCaseMistakes =false
+	  objNanoSpell.ignoreAllCaps = false
+	  objNanoSpell.IgnoreNumeric = false
+	  objNanoSpell.IgnoreEmailAddresses = false
+	  objNanoSpell.IgnoreWebAddresses = false
+	  objNanoSpell.newLineNewSentance = false
+	  objNanoSpell.LicenseKey = LicenseKey
 	path = (replace(LCASE(Request.ServerVariables("PATH_INFO")),"/ajax/asp/tinyspell.asp","/dictionaries/"))+""
-   objTinyMceSpell.AddCustomDictionary("custom.txt")
-   objTinyMceSpell.DictionaryPath = path
+   objNanoSpell.AddCustomDictionary("custom.txt")
+   objNanoSpell.DictionaryPath = path
 		dim arrLangs, i
 		arrLangs = Split(myJSON.params.lang,",")
 			for i=0 to UBOUND(arrLangs)
-			objTinyMceSpell.AddDictionary(trim(arrLangs(i)))
+			objNanoSpell.AddDictionary(trim(arrLangs(i)))
 		next
 '################################################################################################################
  dim first, suggestions, strsuggestions
 				response.write "{""id"":""" & SERVER.HTMLENCODE(myJSON.id) & """,""result"": {"
 				first = true
 				For Each word In myJSON.params.words
-					IF ( NOT objTinyMceSpell.SpellCheck(word)) THEN
+					IF ( NOT objNanoSpell.SpellCheck(word)) THEN
 								if (first) THEN
 										first = false
 								ELSE
@@ -70,7 +70,7 @@ Set objTinyMceSpell = ASPSpellObjectProvider.Create("aspspellcheck")
 				response.write "}}"
 				FUNCTION  Fetch_Suggestions (word)
 				on error resume next
-					Fetch_Suggestions = objTinyMceSpell.Suggestions(word)
+					Fetch_Suggestions = objNanoSpell.Suggestions(word)
 						if err.number >0 then Fetch_Suggestions = split("","-")
 				on error goto 0
 				END FUNCTION
